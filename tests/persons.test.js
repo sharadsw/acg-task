@@ -2,7 +2,7 @@ const Person = require('../models/person')
 const mongoose = require('mongoose')
 
 const app = require('../app')
-const supertest =require('supertest')
+const supertest = require('supertest')
 
 const api = supertest(app)
 
@@ -17,6 +17,14 @@ const getIdfromDb = async () => {
 
   const peopleArray = people.map(p => p.toJSON())
   return peopleArray[0].id
+}
+
+const generateFakeId = async () => {
+  const p = await new Person({ fname: 'random', lname: 'name' }).save()
+  const id = p.id
+  await Person.findByIdAndDelete(id)
+
+  return id
 }
 
 describe('when there is one person in db', () => {
