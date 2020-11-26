@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Person = ({ fname, lname }) => {
+const Person = ({ fname, lname, handleSelect, handleDelete }) => {
 
   return (
     <tr>
@@ -9,14 +9,14 @@ const Person = ({ fname, lname }) => {
       <td>
         <div className="field is-grouped">
           <p className="control">
-            <a className="button is-link">
+            <button className="button is-link" onClick={handleSelect}>
               Select
-            </a>
+            </button>
           </p>
           <p className="control">
-            <a className="button is-link is-light">
+            <button className="button is-link is-light" onClick={handleDelete}>
               Delete
-            </a>
+            </button>
           </p>
         </div>
       </td>
@@ -24,15 +24,11 @@ const Person = ({ fname, lname }) => {
   )
 }
 
-const PersonTable = () => {
-
-  const persons = [
-    { fname: 'Sharad', lname: 'S' }
-  ]
+const PersonTable = ({ persons, handleSelect, handleDelete }) => {
 
   return (
     <div className="container m-6">
-      <table className="table">
+      <table className="table is-fullwidth">
         <thead>
           <tr>
             <th>First Name</th>
@@ -41,7 +37,9 @@ const PersonTable = () => {
           </tr>
         </thead>
         <tbody>
-          {persons.map(p => <Person fname={p.fname} lname={p.lname} />)}
+          {persons.map(p => <Person key={p.id} fname={p.fname} lname={p.lname}
+                                    handleSelect={() => handleSelect(p)}
+                                    handleDelete={() => handleDelete(p)} />)}
         </tbody>
       </table>
     </div>

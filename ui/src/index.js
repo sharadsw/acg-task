@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
 import 'bulma/css/bulma.min.css'
@@ -52,7 +52,7 @@ const App = () => {
           setPersons(persons.map(p => p.id === result.id ? result : p))
         })
         .catch(error => {
-          alert(error.message)
+          alert("This person has already been deleted from the database")
         })
       cleanupForm()
     } else {
@@ -93,7 +93,10 @@ const App = () => {
           handleCancel={handleCancel} />
       </div>
       <div className="column">
-        <PersonTable />
+        <PersonTable
+          persons={persons}
+          handleSelect={handleSelect}
+          handleDelete={handleDelete} />
       </div>
     </div>
   )
