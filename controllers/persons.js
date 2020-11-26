@@ -7,6 +7,16 @@ personRouter.get('/', async (request, response) => {
   response.json(people)
 })
 
+personRouter.get('/:id', async (request, response) => {
+  const person = await Person.findById(request.params.id)
+
+  if (person) {
+    response.json(person)
+  } else {
+    response.status(404).send({ error: 'invalid id' })
+  }
+})
+
 personRouter.post('/', async (request, response) => {
   const body = request.body
 
