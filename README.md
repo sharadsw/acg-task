@@ -12,3 +12,5 @@ Hosted at: [acg-task.herokuapp.com](https://acg-task.herokuapp.com)
 * Express.js
 * Node.js
 * MongoDB (Mongoose.js ODM)
+
+REST API to the database can be found at [acg-task.herokuapp.com/api/persons](https://acg-task.herokuapp.com/api/persons)
