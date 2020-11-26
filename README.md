@@ -1,5 +1,6 @@
 # Persons form and table app
-Code for the persons form and table app task given by ACG World
+Code for the persons form and table app task given by ACG World.
+Hosted at: [acg-task.herokuapp.com](https://acg-task.herokuapp.com)
 
 # Dependencies
 ## Frontend
@@ -11,5 +12,3 @@ Code for the persons form and table app task given by ACG World
 * Express.js
 * Node.js
 * MongoDB (Mongoose.js ODM)
-
-Hosted at: [acg-task.herokuapp.com](https://www.acg-task.herokuapp.com)
