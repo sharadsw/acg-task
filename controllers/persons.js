@@ -23,7 +23,7 @@ personRouter.post('/', async (request, response) => {
   response.status(201).json(result)
 })
 
-personRouter.put('/:id', async (request, resposne) => {
+personRouter.put('/:id', async (request, response) => {
   const body = request.body
 
   if (!body.fname || !body.lname) {
@@ -49,6 +49,4 @@ personRouter.delete('/:id', async (request, response) => {
   response.status(204).end()
 })
 
-module.exports = {
-  personRouter
-}
+module.exports = personRouter
