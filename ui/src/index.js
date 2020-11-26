@@ -10,9 +10,11 @@ import personService from './services/personService'
 
 const App = () => {
 
-  const [ persons, setPersons ] = useState([])
-  const [ fname, setFname ] = useState('')
-  const [ lname, setLname ] = useState('')
+  const [persons, setPersons] = useState([])
+  const [fname, setFname] = useState('')
+  const [lname, setLname] = useState('')
+
+  const [updateId, setUpdateId] = useState(null)
 
   useEffect(() => {
     personService.getAll()
@@ -20,6 +22,12 @@ const App = () => {
         setPersons(result)
       })
   }, [])
+
+  const cleanupForm = () => {
+    setFname('')
+    setLname('')
+    setUpdateId(null)
+  }
 
   const handleFname = (event) => {
     setFname(event.target.value)
@@ -38,21 +46,51 @@ const App = () => {
       fname: fname,
       lname: lname
     }
-    personService.create(newPerson)
-      .then(result => {
-        setPersons(persons.concat(result))
-      })
+    if (updateId) {
+      personService.update(updateId, newPerson)
+        .then(result => {
+          setPersons(persons.map(p => p.id === result.id ? result : p))
+        })
+        .catch(error => {
+          alert(error.message)
+        })
+      cleanupForm()
+    } else {
+      personService.create(newPerson)
+        .then(result => {
+          setPersons(persons.concat(result))
+          cleanupForm()
+        })
+    }
   }
 
-  const handleCancel = (event) =>{
-    setFname('')
-    setLname('')
+  const handleCancel = (event) => {
+    cleanupForm()
+  }
+
+  const handleSelect = (person) => {
+    setFname(person.fname)
+    setLname(person.lname)
+    setUpdateId(person.id)
+  }
+
+  const handleDelete = (person) => {
+    personService.remove(person.id)
+      .then(result => {
+        setPersons(persons.filter(p => p.id !== person.id))
+      })
   }
 
   return (
     <div className="columns">
       <div className="column">
-        <PersonForm fname={fname} lname={lname} handleFname={handleFname} handleLname={handleLname} />
+        <PersonForm
+          fname={fname}
+          lname={lname}
+          handleFname={handleFname}
+          handleLname={handleLname}
+          handleSubmit={handleSubmit}
+          handleCancel={handleCancel} />
       </div>
       <div className="column">
         <PersonTable />

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const PersonForm = ({ fname, lname, handleFname, handleLname }) => {
+const PersonForm = ({ fname, lname, handleFname, handleLname, handleSubmit, handleCancel }) => {
 
   return (
     <div className="container m-6">
@@ -20,14 +20,14 @@ const PersonForm = ({ fname, lname, handleFname, handleLname }) => {
 
       <div className="field is-grouped">
         <p className="control">
-          <a className="button is-primary">
+          <button className="button is-primary" onClick={handleSubmit}>
             Submit
-          </a>
+          </button>
         </p>
         <p className="control">
-          <a className="button is-light">
+          <button className="button is-light" onClick={handleCancel}>
             Cancel
-          </a>
+          </button>
         </p>
       </div>
     </div>
