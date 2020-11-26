@@ -1,20 +1,20 @@
 import React from 'react'
 
-const PersonForm = () => {
+const PersonForm = ({ fname, lname, handleFname, handleLname }) => {
 
   return (
     <div className="container m-6">
       <div className="field">
         <label className="label">First Name</label>
         <div className="control">
-          <input className="input" type="text" />
+          <input className="input" type="text" value={fname} onChange={handleFname} />
         </div>
       </div>
 
       <div className="field">
         <label className="label">Last Name</label>
         <div className="control">
-          <input className="input" type="text" />
+          <input className="input" type="text" value={lname} onChange={handleLname} />
         </div>
       </div>
 
