@@ -21,12 +21,12 @@ const PersonForm = ({ fname, lname, handleFname, handleLname, handleSubmit, hand
       <div className="field is-grouped">
         <p className="control">
           <button className="button is-primary" onClick={handleSubmit}>
-            Submit
+            Save
           </button>
         </p>
         <p className="control">
           <button className="button is-light" onClick={handleCancel}>
-            Cancel
+            Clear
           </button>
         </p>
       </div>
